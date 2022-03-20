@@ -1,0 +1,34 @@
+plugins {
+    id 'groovy'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+group = 'ca.brandonrichardson'
+version = '0.0.1'
+
+// since fernflower isn't published anywhere, package compiled classes into our jar
+jar {
+    from sourceSets.main.output
+    from project(':fernflower').sourceSets.main.output
+}
+
+gradlePlugin {
+    plugins {
+        gtags {
+            id = 'ca.brandonrichardson.gtags'
+            implementationClass = 'ca.brandonrichardson.gtags.GTagsPlugin'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    compileOnly project(':fernflower')
+    implementation 'com.google.guava:guava:31.1-jre'
+}

@@ -1,0 +1,29 @@
+# Ignore vim temporary files
+*.swp
+
+# Ignore object files, shared libraries, executables
+*.dll
+*.so
+*.exe
+*.o
+
+# Ignore output directories
+bin/
+dist/
+out/
+lib/
+build/
+
+# Ignore cached gradle files
+.gradle
+
+# Ignore java classes and jars
+*.class
+*.jar
+
+# Ignore personal project files
+**.iml
+.idea/*
+*.iws
+*.iml
+*.http
