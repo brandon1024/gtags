@@ -49,7 +49,7 @@ class DefaultResultSaver implements IResultSaver {
         }
 
         try {
-            Files.asCharSink(dest, StandardCharsets.UTF_8, FileWriteMode.APPEND)
+            Files.asCharSink(dest, StandardCharsets.UTF_8)
                     .write(content)
         } catch (final IOException ex) {
             throw new RuntimeException("cannot copy class file with entry name '${entryName}' to '${dest}'", ex)

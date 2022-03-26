@@ -1,0 +1,39 @@
+initscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+
+    dependencies {
+        classpath 'ca.brandonrichardson:gtags-plugin:0.0.+'
+    }
+}
+
+allprojects {
+    apply plugin: ca.brandonrichardson.gtags.GTagsPlugin
+
+    gtags {
+        Map<String, String> vars = System.getenv()
+
+        if (vars['GTAGS_INCLUDED_MODULES']) {
+            includedModules = Arrays.asList(vars['GTAGS_INCLUDED_MODULES'].split(','))
+        }
+        if (vars['GTAGS_EXCLUDED_MODULES']) {
+            excludedModules = Arrays.asList(vars['GTAGS_EXCLUDED_MODULES'].split(','))
+        }
+        if (vars['GTAGS_EXCLUDED_PROJECTS']) {
+            excludedProjects = Arrays.asList(vars['GTAGS_EXCLUDED_PROJECTS'].split(','))
+        }
+        if (vars['GTAGS_CONFIGS']) {
+            configs = Arrays.asList(vars['GTAGS_CONFIGS'].split(','))
+        }
+        if (vars['GTAGS_CONCURRENCY']) {
+            concurrency = vars['GTAGS_CONCURRENCY'] as Integer
+        }
+        if (vars['GTAGS_OUTDIR']) {
+            taskOutputDir = vars['GTAGS_OUTDIR']
+        }
+    }
+}
+
